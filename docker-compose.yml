@@ -1,0 +1,50 @@
+version: '3.1'
+
+services:
+
+  mariadb:
+    image: mariadb:10.5.7-focal
+    #restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ChangeThisPasswordBecauseThePortIsOpen
+      MYSQL_USER: someUser
+      MYSQL_PASSWORD: AlsoChangeThisPasswordBecauseThePortIsStillOpen
+      MYSQL_DATABASE: someUser
+    volumes:
+        - mariadb:/var/lib/mysql
+        - ./mysql-entrypoint-initdb:/docker-entrypoint-initdb.d
+
+  app:
+    build: .
+    environment:
+      SLEEP_INTERVAL: 60
+
+  # phpmyadmin:
+  #   image: phpmyadmin:5.0.4
+  #   environment:
+  #   - PMA_HOSTS=mariadb
+  #   #restart: always
+  #   ports:
+  #   - 8080:80
+
+volumes:
+    mariadb:
+
+
+
+################
+
+version: "3"
+services:
+  rest:
+    build: .
+    image: labelprinter-microservice
+    ports:
+      - "8000:8000"
+  fake_brother:
+    image: alpine:3.12
+    command: /bin/sh -c "while true; do nc -l -p 9100; done"
+    ports:
+      - 9100:9100

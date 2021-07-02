@@ -1,0 +1,13 @@
+# This file is used by pip to install required python packages
+# Usage: pip install -r requirements.txt
+
+# REST/HTTP
+Flask==2.0.1
+requests==2.24.0
+
+# Persistence
+#tinydb==4.4.0
+#mysql-connector-python==8.0.22
+
+# Retry
+#tenacity==6.2.0
