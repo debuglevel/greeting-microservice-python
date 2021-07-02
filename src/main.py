@@ -7,7 +7,6 @@ import sys
 import tempfile
 import uuid
 import os
-from . import converter
 import shutil
 import base64
 from flask import Flask
@@ -33,15 +32,8 @@ app = Flask(__name__)
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 logging.config.dictConfig(yaml.load(open("logging-config.yaml", 'r')))
 
-# This is a sample Python script.
-
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 @app.route("/health")
 def health():
@@ -54,7 +46,7 @@ def health():
 
 
 def main():
-    logging.info('Starting...')
+    logger.info('Starting...')
 
     sleeptime = int(os.environ['SLEEP_INTERVAL'])
 

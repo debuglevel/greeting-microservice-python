@@ -18,6 +18,7 @@ python3 main.py --help
 * docker-compose
 * dev cheat sheet
 * basic Flask stuff
+  * use FastAPI instead of Flask.
 * maybe even OpenAPI
 * Logging that does not completely suck
 * is using FastAPI like in https://github.com/debuglevel/labelprinter-microservice/tree/master/app a god idea?
@@ -32,20 +33,20 @@ Works in PowerShell with WSL1: docker build -t youtrack-release-notes . ; docker
 Youtrack-release-notes docker
 docker build -t youtrack-release-notes . ; docker run -ti --add-host youtrack.hosts:10.101.33.8 --env-file=environment.prod -v "${PWD}/out.docker:/app/out" youtrack-release-notes
 
-## Cheat sheet
+## Python cheat sheet
 
 ### Environment
 
-#### Initizalize virtual environment
+#### Initialize virtual environment (using venv)
 
 ```sh
-python3 -m venv env
+python3 -m venv venv
 ```
 
 #### Activate virtual environment
 
 ```sh
-source ./env/bin/activate
+source ./venv/bin/activate
 ```
 
 ### Dependencies
@@ -77,8 +78,8 @@ http://localhost:8000/docs or http://localhost:8000/redoc
 `pip list --outdated` shows outdated (transitive) dependencies.
 
 #### Formatting
-
-`yapf` is used to format Python files. Use `yapf -p -r -i -e env .` on project root to format all files.
+# TODO: maybe use black instead?
+`yapf` is used to format Python files. Use `yapf -p -r -i -e venv .` on project root to format all files.
 
 ### Testing
 
