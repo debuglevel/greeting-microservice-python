@@ -22,7 +22,8 @@ WORKDIR /app
 
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
-COPY src/ /app/
+# /app/app looks ugly, but preserves the "app" module folder
+COPY app/ /app/app/
 
 # switch to unprivileged user for following commands
 USER appuser
@@ -36,7 +37,7 @@ EXPOSE 8080
 
 HEALTHCHECK --interval=5m --timeout=5s --retries=3 --start-period=1m CMD curl --fail http://localhost/health || exit 1
 
-CMD ["uvicorn", "--host=0.0.0.0", "app.main:app", "--port=8080", "--log-config", "logging-config.yaml"]
+CMD ["uvicorn", "--host=0.0.0.0", "app.main:app", "--port=8080", "--log-config=app/logging-config.yaml"]
 
 ###############
 # COPY venv /app/venv

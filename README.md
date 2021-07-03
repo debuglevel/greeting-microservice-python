@@ -62,7 +62,7 @@ pip install -r requirements.txt -r requirements-dev.txt
 #### Start development mode
 
 ```sh
-uvicorn app.main:fastapi --port 8080 --reload --log-config logging-config.yaml
+uvicorn app.main:app --port=8080 --reload --log-config=app/logging-config.yaml
 ```
 
 #### Start production mode
