@@ -56,14 +56,19 @@ pip install -r requirements.txt -r requirements-dev.txt
 
 ### Deployment
 
-#### Start development mode
+#### Development
 
 ```sh
 uvicorn app.main:app --port=8080 --reload --log-config=app/logging-config.yaml
 ```
 
-#### Start production mode
-No idea, maybe use the command from the Dockerfile or look it up at https://fastapi.tiangolo.com/
+#### Production
+This should be quite okay:
+```sh
+uvicorn app.main:app --port=8080 --log-config=app/logging-config.yaml
+```
+
+But some docs mention that `gunicorn` can be used as a manager.
 
 ### Documentation
 
