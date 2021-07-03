@@ -6,11 +6,18 @@ incremental: false # incremental - whether the configuration is to be interprete
 
 # Formatters define how log output should look like
 formatters:
-  notinsane:
+  timestamped-classic-stdout:
     style: "{" # use {} template syntax instead of %()
     datefmt: "%Y-%m-%dT%H:%M:%S%z" # ISO-8601 compliant
     # see https://docs.python.org/3/library/logging.html#logrecord-attributes for variables
-    format: "{asctime:s} {threadName:s} {levelname:s} {name:s}|{funcName:s}():{lineno:d} - {message:s}"
+    format: "{asctime:s} [{threadName:s}] {levelname:5s} {name:s}:{funcName:s}():{lineno:d} - {message:s}"
+
+  # If further log processing adds a timestamp, you probably do not want your own timestamp written out.
+  classic-stdout:
+    style: "{" # use {} template syntax instead of %()
+    datefmt: "%Y-%m-%dT%H:%M:%S%z" # ISO-8601 compliant
+    # see https://docs.python.org/3/library/logging.html#logrecord-attributes for variables
+    format: "[{threadName:s}] {levelname:5s} {name:s}:{funcName:s}():{lineno:d} - {message:s}"
 #  # This would create a custom formatter
 #  custom:
 #      (): my.package.customFormatterFactory # indicates that a user-defined instantiation is needed
@@ -30,7 +37,8 @@ handlers:
   console:
     class: logging.StreamHandler
     level: DEBUG
-    formatter: notinsane
+    formatter: timestamped-classic-stdout
+    #formatter: classic-stdout
     #filters:
     # - my_filter
     stream: ext://sys.stdout
