@@ -17,11 +17,8 @@ python3 main.py --help
 ## TODO
 * docker-compose
 * dev cheat sheet
-* basic Flask stuff
-  * use FastAPI instead of Flask.
-* maybe even OpenAPI
 * Logging that does not completely suck
-* is using FastAPI like in https://github.com/debuglevel/labelprinter-microservice/tree/master/app a god idea?
+  * would nice to be configurable via ENV
 * Testing?
 * linting?
 * Formatting?
@@ -81,8 +78,12 @@ Open http://localhost:8000/docs or http://localhost:8000/redoc
 `pip list --outdated` shows outdated (transitive) dependencies.
 
 #### Formatting
-# TODO: maybe use black instead?
-`yapf` is used to format Python files. Use `yapf -p -r -i -e venv .` on project root to format all files.
+##### black
+`black` is used for formatting, because `black` does not ask about your opinion about how Python code should be formatted.
+```bash
+pip3 install black
+black .
+```
 
 ### Testing
 
