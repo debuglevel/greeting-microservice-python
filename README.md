@@ -54,7 +54,7 @@ source ./venv/bin/activate
 #### Install dependencies
 
 ```sh
-pip install -r requirements.txt -r dev-requirements.txt
+pip install -r requirements.txt -r requirements-dev.txt
 ```
 
 ### Deployment
@@ -62,14 +62,17 @@ pip install -r requirements.txt -r dev-requirements.txt
 #### Start development mode
 
 ```sh
-uvicorn app.main:fastapi --reload --log-config logging-config.yaml
+uvicorn app.main:fastapi --port 8080 --reload --log-config logging-config.yaml
 ```
+
+#### Start production mode
+No idea, maybe use the command from the Dockerfile or look it up at https://fastapi.tiangolo.com/
 
 ### Documentation
 
 #### Display OpenAPI documentations
 
-http://localhost:8000/docs or http://localhost:8000/redoc
+Open http://localhost:8000/docs or http://localhost:8000/redoc
 
 ### Development
 

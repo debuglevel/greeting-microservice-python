@@ -1,6 +1,6 @@
 # Ignore Docker related files as they might change during development,
 # but their content should have no impact on the actual application.
-# If they change and in Dockerfile is a "COPY . /src", Docker would invalidate
+# If they change and in Dockerfile is a "COPY . /app", Docker would invalidate
 # caches for subsequent RUN statements (as it assumes something has changed).
 Dockerfile
 .dockerignore

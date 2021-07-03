@@ -1,45 +1,49 @@
+ARG PYTHON_VERSION=3.9.6
+ARG ALPINE_VERSION=3.14
+
 ## Final image
-#FROM python:3.9.2-buster
-FROM python:3.9.2-slim-buster
+#FROM python:3.9.6-slim-buster
+FROM python:$PYTHON_VERSION-alpine$ALPINE_VERSION as runtime
+
+ENV PYTHONUNBUFFERED 1
+
+# add a group and an user with specified IDs
+RUN addgroup -S -g 1111 appgroup && adduser -S -G appgroup -u 1111 appuser
+#RUN groupadd -r -g 1111 appgroup && useradd -r -g appgroup -u 1111 --no-log-init appuser # if based on Debian/Ubuntu
+
+# add curl for health check
+RUN apk add --no-cache curl
+#RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/* # if based on Debian/Ubuntu
+
+# add /data directory with correct rights
+RUN mkdir /data && chown 1111:1111 /data
 
 WORKDIR /app
+
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 COPY src/ /app/
 
-#RUN mkdir -p /app/temp /app/out /app/data
+# switch to unprivileged user for following commands
+USER appuser
 
-ENV FLASK_APP=rest.py
-CMD [ "flask", "run", "--host=0.0.0.0", "--port=8080" ]
+## set the default port to 8080
+#ENV MICRONAUT_SERVER_PORT 8080
+EXPOSE 8080
 
-############
-# FROM python:3.9.0-alpine3.12
-#
-# WORKDIR /app
-# COPY requirements.txt .
-# RUN pip install -r requirements.txt
-# COPY src/ .
-#
-# CMD [ "python", "./main.py" ]
+## use a log appender with no timestamps as Docker logs the timestamp itself ("docker logs -t ID")
+#ENV LOG_APPENDER classic-stdout
+
+HEALTHCHECK --interval=5m --timeout=5s --retries=3 --start-period=1m CMD curl --fail http://localhost/health || exit 1
+
+CMD ["uvicorn", "--host=0.0.0.0", "app.main:app", "--port=8080", "--log-config", "logging-config.yaml"]
+
 ###############
-## Final image
-# FROM python:3.6
-#
-# RUN apt-get update && apt-get install -y inkscape pdftk
-#
-# WORKDIR /app
-#
 # COPY venv /app/venv
-#
 # COPY requirements.txt .
 # RUN venv/bin/activate && pip3 install -r requirements.txt
-#
-# RUN mkdir /app/temp /app/out /app/data
-# COPY . /app/
-#
-# ENV FLASK_APP=rest-server.py
 # CMD venv/bin/activate && cd base && flask run --host=0.0.0.0 --port=80
-##################
+
 # # NOTE: We do not use the python:3.x-alpine image because it lacks the corresponding python-dev package.
 # #       But python-dev cannot be installed via apk as it might not be available in the corresponding version (or things get installed in the wrong way anyway).
 # #       Therefore we set up python ourselves.
@@ -82,8 +86,6 @@ CMD [ "flask", "run", "--host=0.0.0.0", "--port=8080" ]
 #
 # # Activate venv
 # ENV PATH="/venv/bin:$PATH"
-# EXPOSE 8000
-# CMD ["uvicorn", "--host=0.0.0.0", "app.main:fastapi", "--log-config", "logging-config.yaml"]
 ###########
 # USER python
 #CMD ["gunicorn", "--workers", "8", "--log-level", "INFO", "--bind", "0.0.0.0:5000", "manage:app"]
