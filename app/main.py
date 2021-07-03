@@ -14,6 +14,13 @@ logger = logging.getLogger(__name__)
 logging.config.dictConfig(yaml.load(open("logging-config.yaml", 'r')))
 
 
+@app.get("/health")
+# async def read_root():
+def health():
+    logger.debug("Received GET request on /health")
+    return {"status": "up"}
+
+
 @app.get("/")
 # async def read_root():
 def read_root():
@@ -24,16 +31,6 @@ def read_root():
 async def read_item(item_id: int, q: Optional[str] = None):
     # def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
-#
-#
-# @app.route("/health")
-# def health():
-#     print('Received GET request on /health', file=sys.stderr)
-#     return jsonify(
-#         {
-#             "status": "up",
-#         }
-#     )
 
 #
 # def main():
