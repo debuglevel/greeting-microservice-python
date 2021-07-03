@@ -1,5 +1,6 @@
 import pytest
-#from app.main import get_health
+
+# from app.main import get_health
 import app.health
 import os.path
 import PIL

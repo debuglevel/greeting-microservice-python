@@ -10,7 +10,7 @@ app = FastAPI()
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-#logging.config.dictConfig(yaml.load(open("logging-config.yaml", 'r'))) # configured via cmdline
+# logging.config.dictConfig(yaml.load(open("logging-config.yaml", 'r'))) # configured via cmdline
 
 
 @app.get("/health")
@@ -33,9 +33,9 @@ async def read_item(item_id: int, q: Optional[str] = None):
 
 
 def main():
-    logger.info('Starting...')
+    logger.info("Starting...")
 
-    #sleeptime = int(os.environ['SLEEP_INTERVAL'])
+    # sleeptime = int(os.environ['SLEEP_INTERVAL'])
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--some-host", help="some host", type=str, default="localhost")
@@ -48,5 +48,5 @@ def main():
 
 
 # This only runs if the script is called instead of uvicorn; should probably not be used.
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
