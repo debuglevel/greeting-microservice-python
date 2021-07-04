@@ -6,27 +6,27 @@ from typing import Optional
 from fastapi import FastAPI
 import uvicorn
 
-app = FastAPI()
+fastapi = FastAPI()
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 # logging.config.dictConfig(yaml.load(open("logging-config.yaml", 'r'))) # configured via cmdline
 
 
-@app.get("/health")
+@fastapi.get("/health")
 # async def read_root():
 def get_health():
     logger.debug("Received GET request on /health")
     return {"status": "up"}
 
 
-@app.get("/")
+@fastapi.get("/")
 # async def read_root():
 def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/items/{item_id}")
+@fastapi.get("/items/{item_id}")
 async def read_item(item_id: int, q: Optional[str] = None):
     # def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
@@ -44,7 +44,7 @@ def main():
     # args.some_port
     # args.some_host
 
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(fastapi, host="0.0.0.0", port=8080)
 
 
 # This only runs if the script is called instead of uvicorn; should probably not be used.
