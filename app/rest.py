@@ -16,7 +16,7 @@ def get_health():
     return health.get_health()
 
 @fastapi.get("/health_async")
-async def get_health():
+async def get_health_async():
     logger.debug("Received GET request on /health")
     return await health.get_health_async()
 

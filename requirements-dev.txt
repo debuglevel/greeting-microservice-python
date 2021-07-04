@@ -1,24 +1,25 @@
-# TODO: add versions.
-# TODO: remove stuff which is probably not needed
-# TODO: No idea if the file name is best practise
-# TODO: "-r requirements.txt" ?
-#black
+# This file is to be used with pip to install required python packages
+# Usage: pip install -r requirements-dev.txt
+
 #mypy
-#flake8
-#requests
-#pytest-cov
 #isort
-#autoflake
+
+# also install regular requirements.txt
+-r requirements.txt
 
 # Formatting
-black
+black==21.6b0
+#flake8
+#autoflake
 
 # Testing
 pytest==6.1.0
 pytest-watch==4.2.0
 pytest-asyncio==0.14.0
-python-magic==0.4.18
+#pytest-cov
 
 # Testing against multiple environments
 tox==3.23.1
 
+# Check type annotations
+mypy==0.910
