@@ -20,6 +20,7 @@ python3 main.py --help
 * Logging that does not completely suck
   * would nice to be configurable via ENV
 * Testing?
+  * tox (which seems to test against different Python versions. WTF compatibility?)
 * linting?
 * Formatting?
 

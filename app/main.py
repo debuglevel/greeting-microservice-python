@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 @app.get("/health")
 # async def read_root():
-def health():
+def get_health():
     logger.debug("Received GET request on /health")
     return {"status": "up"}
 
