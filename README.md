@@ -106,6 +106,12 @@ pytest-watch -c # -c clears terminal before pytest runs
 tox
 ```
 
+### All-in-one
+`tox.ini` is also configured to run some additional commands (like a Makefile):
+* `black .` for formatting
+* `python update-openapi.py` to update `openapi.yaml`
+* `pytest` for testing
+
 ### Deployment
 
 #### Development (with auto reloading changed files)
