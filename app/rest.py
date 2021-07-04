@@ -1,27 +1,27 @@
 #!/bin/usr/python3
-import argparse
 import logging.config
-import yaml
 from typing import Optional
 from fastapi import FastAPI
-import uvicorn
+from app import health
 
 fastapi = FastAPI()
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-# logging.config.dictConfig(yaml.load(open("logging-config.yaml", 'r'))) # configured via cmdline
 
 
 @fastapi.get("/health")
-# async def read_root():
 def get_health():
     logger.debug("Received GET request on /health")
-    return {"status": "up"}
+    return health.get_health()
+
+@fastapi.get("/health_async")
+async def get_health():
+    logger.debug("Received GET request on /health")
+    return await health.get_health_async()
 
 
 @fastapi.get("/")
-# async def read_root():
 def read_root():
     return {"Hello": "World"}
 
