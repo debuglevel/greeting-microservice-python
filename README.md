@@ -20,7 +20,7 @@ python3 rest.py --help
 * Logging that does not completely suck
   * would nice to be configurable via ENV
 * Testing?
-  * tox (which seems to test against different Python versions. WTF compatibility?)
+  * tox (which seems to test against different Python versions. WTF compatibility? But it does not install those environments/python versions!)
 * linting?
 * Formatting?
 
@@ -104,4 +104,9 @@ pytest
 ```sh
 pytest-watch
 pytest-watch -c # clear terminal before pytest runs
+```
+
+#### Run test against different Python environments
+```sh
+tox
 ```
