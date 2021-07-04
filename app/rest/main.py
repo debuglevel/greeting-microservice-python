@@ -2,7 +2,10 @@
 import logging.config
 from typing import Optional
 from fastapi import FastAPI
+
+import app.library.person
 from app.library import health
+from app.rest.person import PersonIn, PersonOut
 
 fastapi = FastAPI()
 
@@ -18,7 +21,7 @@ def get_health():
 
 @fastapi.get("/health_async")
 async def get_health_async():
-    logger.debug("Received GET request on /health")
+    logger.debug("Received GET request on /health_async")
     return await health.get_health_async()
 
 
@@ -27,11 +30,19 @@ def read_root():
     return {"Hello": "World"}
 
 
-@fastapi.get("/items/{item_id}")
-async def read_item(item_id: int, q: Optional[str] = None):
-    # def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@fastapi.get("/greetings/{greeting_id}")
+async def read_item(greeting_id: int, language: Optional[str] = None):
+    return {"greeting_id": greeting_id, "language": language, "greeting": f"Say Hello to ID {greeting_id} in {language}"}
 
+@fastapi.post("/persons/", response_model=PersonOut)
+async def post_person(input_person: PersonIn):
+    person: app.library.person.Person = await app.library.person.create_person(input_person.name)
+    return PersonOut(name=person.name, created_on=person.created_on)
+
+@fastapi.get("/persons/{name}", response_model=PersonOut)
+async def get_person(name: str):
+    person: app.library.person.Person = await app.library.person.get_person(name)
+    return PersonOut(name=person.name, created_on=person.created_on)
 
 # def main():
 #     logger.info("Starting...")

@@ -1,14 +1,23 @@
 import logging
+from pydantic import BaseModel
+from datetime import datetime
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-def get_health():
-    logger.debug("Getting health status...")
-    return {"status": "up"}
+class Health(BaseModel):
+    status: str
+    datetime: datetime
 
 
-async def get_health_async():
-    logger.debug("Getting health status (async)...")
-    return {"status": "up"}
+def get_health() -> Health:
+    logger.debug("Getting health...")
+    health: Health = Health(status="up", datetime=datetime.now())
+    return health
+
+
+async def get_health_async() -> Health:
+    logger.debug("Getting health (async)...")
+    health: Health = Health(status="up", datetime=datetime.now())
+    return health
