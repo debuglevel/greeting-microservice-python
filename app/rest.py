@@ -20,7 +20,6 @@ async def get_health_async():
     logger.debug("Received GET request on /health")
     return await health.get_health_async()
 
-
 @fastapi.get("/")
 def read_root():
     return {"Hello": "World"}
@@ -46,6 +45,14 @@ async def read_item(item_id: int, q: Optional[str] = None):
 #
 #     uvicorn.run(fastapi, host="0.0.0.0", port=8080)
 #
+#
+#
+# def main():
+#     import uvicorn
+#     import yaml
+#     logging.config.dictConfig(yaml.load(open("app/logging-config.yaml", 'r')))  # configured via cmdline
+#     logger.info("Starting via main()...")
+#     uvicorn.run(fastapi, host="0.0.0.0", port=8080)
 #
 # # This only runs if the script is called instead of uvicorn; should probably not be used.
 # if __name__ == "__main__":
