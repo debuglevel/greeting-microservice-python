@@ -1,18 +1,27 @@
 # Python Microservice Template
 Python microservice template, inspired by my Kotlin based microservice template https://github.com/debuglevel/greeting-microservice, but with way less enthusiasm; and I'm not too sure that too much works here, because I just copied a bunch of stuff from my various other projects to have them at one place at least. 
 
-## Development environment
-* PyCharm Community
-* venv
-* Python 3.8
 
-## venv stuff
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
-python3 rest.py --help
-```
+## Development environment
+* Python environment
+  * Python 3.8
+  * venv
+* Code quality
+  * Formatting
+    * black
+  * Type annotations
+    * mypy
+  * Testing
+    * pytest
+    * tox
+* REST
+  * FastAPI
+* Deployment
+  * Docker
+  * docker-compose
+* IDE
+  * PyCharm Community
+
 
 ## TODO
 * docker-compose
@@ -47,6 +56,10 @@ python3 -m venv venv
 source ./venv/bin/activate
 ```
 
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
 ### Dependencies
 
 #### Install dependencies
@@ -60,16 +73,21 @@ pip install -r requirements.txt -r requirements-dev.txt
 #### Development
 
 ```sh
-uvicorn app.rest:fastapi --port=8080 --reload --log-config=app/logging-config.yaml
+uvicorn app.rest.main:fastapi --port=8080 --reload --log-config=app/logging-config.yaml
 ```
 
 #### Production
 This should be quite okay:
 ```sh
-uvicorn app.rest:fastapi --port=8080 --log-config=app/logging-config.yaml
+uvicorn app.rest.main:fastapi --port=8080 --log-config=app/logging-config.yaml
 ```
 
 But some docs mention that `gunicorn` can be used as a manager.
+
+#### Docker compose
+```sh
+docker compose up --build
+```
 
 ### Documentation
 

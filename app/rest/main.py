@@ -2,7 +2,7 @@
 import logging.config
 from typing import Optional
 from fastapi import FastAPI
-from app import health
+from app.library import health
 
 fastapi = FastAPI()
 
