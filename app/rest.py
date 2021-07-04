@@ -32,21 +32,21 @@ async def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
 
-def main():
-    logger.info("Starting...")
-
-    # sleeptime = int(os.environ['SLEEP_INTERVAL'])
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--some-host", help="some host", type=str, default="localhost")
-    parser.add_argument("--some-port", help="some port", type=int, default=8080)
-    args = parser.parse_args()
-    # args.some_port
-    # args.some_host
-
-    uvicorn.run(fastapi, host="0.0.0.0", port=8080)
-
-
-# This only runs if the script is called instead of uvicorn; should probably not be used.
-if __name__ == "__main__":
-    main()
+# def main():
+#     logger.info("Starting...")
+#
+#     # sleeptime = int(os.environ['SLEEP_INTERVAL'])
+#
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("--some-host", help="some host", type=str, default="localhost")
+#     parser.add_argument("--some-port", help="some port", type=int, default=8080)
+#     args = parser.parse_args()
+#     # args.some_port
+#     # args.some_host
+#
+#     uvicorn.run(fastapi, host="0.0.0.0", port=8080)
+#
+#
+# # This only runs if the script is called instead of uvicorn; should probably not be used.
+# if __name__ == "__main__":
+#     main()

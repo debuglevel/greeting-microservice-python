@@ -1,13 +1,13 @@
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-import app.main
-from app.main import fastapi
+import app.rest
+from app.rest import fastapi
 
 #@pytest.mark.asyncio
 #async def test_health():
 def test_health():
-    status = app.main.get_health()["status"]
+    status = app.rest.get_health()["status"]
     assert status == "up"
 
 client = TestClient(fastapi)

@@ -11,7 +11,7 @@ Python microservice template, inspired by my Kotlin based microservice template 
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
-python3 main.py --help
+python3 rest.py --help
 ```
 
 ## TODO
@@ -60,13 +60,13 @@ pip install -r requirements.txt -r requirements-dev.txt
 #### Development
 
 ```sh
-uvicorn app.main:app --port=8080 --reload --log-config=app/logging-config.yaml
+uvicorn app.rest:fastapi --port=8080 --reload --log-config=app/logging-config.yaml
 ```
 
 #### Production
 This should be quite okay:
 ```sh
-uvicorn app.main:app --port=8080 --log-config=app/logging-config.yaml
+uvicorn app.rest:fastapi --port=8080 --log-config=app/logging-config.yaml
 ```
 
 But some docs mention that `gunicorn` can be used as a manager.

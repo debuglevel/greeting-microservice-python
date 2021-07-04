@@ -37,7 +37,7 @@ EXPOSE 8080
 
 HEALTHCHECK --interval=5m --timeout=5s --retries=3 --start-period=1m CMD curl --fail http://localhost/health || exit 1
 
-CMD ["uvicorn", "--host=0.0.0.0", "app.main:app", "--port=8080", "--log-config=app/logging-config.yaml"]
+CMD ["uvicorn", "--host=0.0.0.0", "app.rest:fastapi", "--port=8080", "--log-config=app/logging-config.yaml"]
 
 ###############
 # COPY venv /app/venv
