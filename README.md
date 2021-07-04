@@ -106,6 +106,14 @@ pytest-watch -c # -c clears terminal before pytest runs
 tox
 ```
 
+### Documentation
+
+#### OpenAPI documentation
+
+* Open [Swagger UI](http://localhost:8000/docs) or [ReDoc](http://localhost:8000/redoc)
+* OpenAPI specs are available (as JSON) at http://localhost:8080/openapi.json 
+* Update `openapi.json` via `python update-openapi.py`
+
 ### All-in-one
 `tox.ini` is also configured to run some additional commands (like a Makefile):
 * `black .` for formatting
@@ -136,11 +144,4 @@ But some docs mention that `gunicorn` can be used as a manager.
 docker compose up --build
 ```
 
-### Documentation
-
-#### OpenAPI documentation
-
-* Open [Swagger UI](http://localhost:8000/docs) or [ReDoc](http://localhost:8000/redoc)
-* OpenAPI specs are available (as JSON) at http://localhost:8080/openapi.json 
-* Update `openapi.json` via `python update-openapi.py`
 
