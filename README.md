@@ -49,7 +49,7 @@ python3 -m venv venv
 #### Activate virtual environment
 
 ```sh
-source ./venv/bin/activate
+source ./venv/Scripts/activate
 ```
 
 ```powershell
