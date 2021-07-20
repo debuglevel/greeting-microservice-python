@@ -2,7 +2,7 @@ ARG PYTHON_VERSION=3.9.6
 ARG ALPINE_VERSION=3.14
 
 ## Final image
-#FROM python:3.9.6-slim-buster
+#FROM python:$PYTHON_VERSION-slim-buster
 FROM python:$PYTHON_VERSION-alpine$ALPINE_VERSION as runtime
 
 ENV PYTHONUNBUFFERED 1
