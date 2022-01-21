@@ -49,9 +49,10 @@ python3 -m venv venv
 #### Activate virtual environment
 
 ```sh
-source ./venv/Scripts/activate
+source ./venv/bin/activate
 ```
 
+Note: If created on Windows, the directory is named `Scripts` because [Python is weird](https://stackoverflow.com/questions/43826134/why-is-the-bin-directory-named-differently-scripts-on-windows).
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
